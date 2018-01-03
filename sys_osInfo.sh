@@ -2,7 +2,7 @@
 
 getMacOSXinfo() {
   SWVERS_CHECK=$(which sw_vers)
-  if [ -z "$SWVERS_CHECK" ] ; then
+  if [ ! -z "$SWVERS_CHECK" ] ; then
     SWVERS_OUTPUT=$(defaults read loginwindow SystemVersionStampAsString)
     echo "Computer is MacOSX running $SWVERS_OUTPUT"
   else
@@ -14,7 +14,7 @@ getMacOSXinfo() {
 
 getLinuxOSinfo() {
   OS_VERSION_CHECK=$(lsb_release -d)
-  if [ -z "$OS_VERSION_CHECK" ] ; then
+  if [ ! -z "$OS_VERSION_CHECK" ] ; then
     OS_VERSION_ID=$(lsb_release -d | cut -d$'\t' -f2 | cut -d\  -f1)
     if [[ "$OS_VERSION_ID" = "Ubuntu" ]] ; then
       OS_VERSION_ID_FULL=$(lsb_release -d | cut -d$'\t' -f2)
@@ -36,13 +36,13 @@ getUnknownOSinfo() {
   GENERIC_VERS_CHECK=$(ls / | grep proc)
   GENERIC_VERS_CHECK2=$(ls / | grep private)
   UNAMEOUTPUT=$(uname -a)
-  if [ -z "$MAC_SWVERS_CHECK" ] ; then
+  if [ ! -z "$MAC_SWVERS_CHECK" ] ; then
     echo 'OS appears to be running MacOSX, but this may be incorrect.  Additional information is as follows:'
     echo "$UNAMEOUTPUT"
-  elif [ -z "$GENERIC_VERS_CHECK" ] ; then
+  elif [ ! -z "$GENERIC_VERS_CHECK" ] ; then
     echo 'OS appears to be running Linux, but this may be incorrect.  Additional information is as follows:'
     echo "$UNAMEOUTPUT"
-  elif [ -z "$GENERIC_VERS_CHECK2" ] ; then 
+  elif [ ! -z "$GENERIC_VERS_CHECK2" ] ; then 
     echo 'OS may be running MacOSX, but the information is conflicting.  Additional information is as follows:'
     echo "$UNAMEOUTPUT"
   else:
@@ -51,7 +51,7 @@ getUnknownOSinfo() {
   fi
 }
 
-GCCDETECT=$(uname -r)
+GCCDETECT=$(uname -s)
 let OSTYPE=0
 if [[ "$GCCDETECT" = "Linux" ]] ; then
   let OSTYPE=1
