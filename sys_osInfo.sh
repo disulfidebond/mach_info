@@ -1,7 +1,7 @@
 #!/bin/sh
 
 getMacOSXinfo() {
-  SWVERS_CHECK=$(which sw_vers)
+  SWVERS_CHECK=$(which sw_vers) # credit https://coderwall.com/p/4yz8dq/determine-os-x-version-from-the-command-line
   if [ ! -z "$SWVERS_CHECK" ] ; then
     SWVERS_OUTPUT=$(defaults read loginwindow SystemVersionStampAsString)
     echo "Computer is MacOSX running $SWVERS_OUTPUT"
