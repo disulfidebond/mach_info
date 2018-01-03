@@ -5,10 +5,11 @@ getMacOSXinfo() {
   if [ -z "$SWVERS_CHECK" ] ; then
     SWVERS_OUTPUT=$(defaults read loginwindow SystemVersionStampAsString)
     echo "Computer is MacOSX running $SWVERS_OUTPUT"
-   else
+  else
     echo 'Error attempting to find OS version.  Computer is running MacOSX, additional information is as follows:'
     UNAMEOUTPUT=$(uname -a)
     echo "$UNAMEOUTPUT"
+  fi
 }
 
 getLinuxOSinfo() {
@@ -26,6 +27,7 @@ getLinuxOSinfo() {
     OSINFO_AVAIL=$(cat /etc/*release)
     echo 'Unable to retrieve information on Linux OS.  Available information is as follows:'
     echo "$OSINFO_AVAIL"
+  fi
 }
 
 getUnknownOSinfo() {
@@ -46,6 +48,7 @@ getUnknownOSinfo() {
   else:
     echo 'Unknown OS.  Additional information is as follows:'
     echo "$UNAMEOUTPUT"
+  fi
 }
 
 GCCDETECT=$(uname -r)
